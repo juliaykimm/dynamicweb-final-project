@@ -5,13 +5,14 @@ const firebase = require("firebase");
 // Initialize Firebase Database
 const db = firebase.firestore();
 // Reference a specific collection
-const blogposts = db.collection("blogposts");
+const newPost = db.collection("newPost");
 
 const form = `
 <form action="/create/submit">
-    <input type="text" name="title" placeholder="Title of Post"/>
-    <input type="text" name="text" placeholder="Text of Post"/>
-    <input type="text" name="author" placeholder="Author"/>
+    <input type="text" name="recipeName" placeholder="Recipe name"/>
+    <input type="text" name="recipeAuthor" placeholder="Author"/>
+    <input type="text" name="ingredients" placeholder="Ingredients"/>
+    <input type="text" name="steps" placeholder="Steps"/>
     <button type="submit">Submit Post</button>
 </form>
 `;
@@ -22,11 +23,11 @@ router.get("/", (req, res) => res.send(form));
 // route for submitting form
 router.get("/submit", (req, res) => {
   const queryParams = req.query;
-  // custom id for our posts
-  const idFromTitle = queryParams.title.replace(/\s+/g, "-").toLowerCase();
-  // cool post = cool-post
-  blogposts
-    .doc(idFromTitle) // allows you to create new posts or update them
+
+  const idFromTitle = queryParams.recipeName.replace(/\s+/g, "-").toLowerCase();
+
+  newPost
+    .doc(idFromTitle)
     .set(queryParams)
     .then(function (doc) {
       res.send("Successful Submission");

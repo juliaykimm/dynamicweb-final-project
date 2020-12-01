@@ -1,5 +1,5 @@
-// backend application for final
-const express = require("express"); // "npm install express" to install express
+// Backend Application for Final Project
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 4000;
 
@@ -17,14 +17,21 @@ const firebaseConfig = {
 const firebase = require("firebase");
 firebase.initializeApp(firebaseConfig);
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 const indexRoute = require("./routes/index.js");
 const postRoute = require("./routes/post.js");
-const createRoute = require("./routes/createBlogpost.js");
+const createRoute = require("./routes/createPost.js");
 
 app.use("/", indexRoute);
 app.use("/post", postRoute);
 app.use("/create", createRoute);
 
-app.listen(port, () =>
-  console.log(`Exercise Four is running at local host:${port}`)
-);
+app.listen(port, () => console.log(`Backend is running at port:${port}`));

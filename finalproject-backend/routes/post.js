@@ -6,13 +6,13 @@ const firebase = require("firebase");
 // Initialize Firebase Database
 const db = firebase.firestore();
 // Reference a specific collection
-const blogposts = db.collection("blogposts");
+const newPost = db.collection("newPost");
 
-router.get("/", (req, res) => res.send("No id provided"));
+// router.get("/", (req, res) => res.send("No id provided"));
 
 router.get("/:id", (req, res) => {
   const queryId = req.params.id;
-  blogposts
+  newPost
     .doc(queryId)
     .get()
     .then(function (doc) {
