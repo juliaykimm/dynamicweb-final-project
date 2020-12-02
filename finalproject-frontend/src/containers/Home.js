@@ -6,11 +6,10 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:4000`)
+      .get(`http://localhost:4000`)
       .then(function (response) {
-        if (response.data) {
-          setAPIData(response.data);
-        }
+        const data = response.data;
+        setAPIData(data);
       })
       .catch(function (error) {
         console.log("error", error);
@@ -18,9 +17,15 @@ function Home() {
   }, []);
 
   console.log({ APIData });
+
   return (
     <div>
       <h1>recipes</h1>
+      {APIData.map((APIData, i) => (
+        <div key={i}>
+          <p>{APIData.recipeName}</p>
+        </div>
+      ))}
     </div>
   );
 }
