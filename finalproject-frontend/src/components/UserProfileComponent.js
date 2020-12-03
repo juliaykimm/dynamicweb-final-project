@@ -1,5 +1,4 @@
 import React from "react";
-import Home from "../containers/Home";
 
 function UserProfileComponent({ userInformation }) {
   return (

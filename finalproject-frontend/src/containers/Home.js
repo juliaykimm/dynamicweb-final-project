@@ -6,7 +6,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000`)
+      .get(`https://mysterious-atoll-42977.herokuapp.com/`)
       .then(function (response) {
         const data = response.data;
         setAPIData(data);
