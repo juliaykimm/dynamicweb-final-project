@@ -1,3 +1,72 @@
-.App {
+body {
+  color: white;
+  background-color: #7d94b8;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+button:hover {
+  color: #52504e;
+}
+
+.SubPageTitles {
   text-align: center;
+  font-size: 18px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.PageTitles {
+  text-align: center;
+
+  font-size: 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.recipes {
+  margin-left: 80px;
+}
+
+.Header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Header nav a {
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  margin: 10px;
+  text-decoration: underline;
+}
+
+.Header nav a:hover {
+  color: #404f69;
+}
+
+.Header nav a:active {
+  color: #404f69;
+}
+
+p {
+  margin-left: 400px;
+  margin-right: 400px;
+}
+
+.SignupForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SignupForm input,
+.SignupForm button {
+  margin-bottom: 30px;
+  margin-top: 20px;
+  max-width: 400px;
+  width: 500px;
+  height: 50px;
 }

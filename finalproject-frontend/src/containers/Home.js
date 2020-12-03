@@ -20,9 +20,9 @@ function Home() {
 
   return (
     <div>
-      <h1>recipes</h1>
+      <h1 className="PageTitles">FIND RECIPES:</h1>
       {APIData.map((APIData, i) => (
-        <div key={i}>
+        <div className="recipes" key={i}>
           <p>{APIData.recipeName}</p>
         </div>
       ))}
