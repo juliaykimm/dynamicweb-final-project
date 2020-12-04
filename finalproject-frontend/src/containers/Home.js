@@ -6,7 +6,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`https://mysterious-atoll-42977.herokuapp.com/`)
+      .get(`http://localhost:4000`)
       .then(function (response) {
         const data = response.data;
         setAPIData(data);
@@ -14,16 +14,19 @@ function Home() {
       .catch(function (error) {
         console.log("error", error);
       });
-  }, []);
-
-  console.log({ APIData });
+  }, [APIData]);
 
   return (
     <div>
       <h1 className="PageTitles">FIND RECIPES:</h1>
       {APIData.map((APIData, i) => (
         <div className="recipes" key={i}>
-          <p>{APIData.recipeName}</p>
+          <a href="">{APIData.recipeName}</a>
+        </div>
+      ))}
+      {APIData.map((APIData, i) => (
+        <div className="recipes" key={i}>
+          <p>{APIData.recipeAuhtor}</p>
         </div>
       ))}
     </div>

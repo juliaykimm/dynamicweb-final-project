@@ -17,13 +17,10 @@ const form = `
 </form>
 `;
 
-// default route serves form
 router.get("/", (req, res) => res.send(form));
 
-// route for submitting form
 router.get("/submit", (req, res) => {
   const queryParams = req.query;
-
   const idFromTitle = queryParams.recipeName.replace(/\s+/g, "-").toLowerCase();
 
   newPost

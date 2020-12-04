@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`https://mysterious-atoll-42977.herokuapp.com/`)
+      .get(`http://localhost:4000`)
       .then(function (response) {
         const data = response.data;
         setAPIData(data);
@@ -37,9 +37,7 @@ function App() {
       .catch(function (error) {
         console.log("error", error);
       });
-  }, []);
-
-  console.log({ APIData });
+  }, [APIData]);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -50,7 +48,7 @@ function App() {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-  }, [firebaseConfig]);
+  }, []);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {

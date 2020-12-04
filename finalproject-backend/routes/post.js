@@ -1,14 +1,9 @@
 // Query one Blogpost
 const express = require("express");
 const router = express.Router();
-// Require Firebase
 const firebase = require("firebase");
-// Initialize Firebase Database
 const db = firebase.firestore();
-// Reference a specific collection
 const newPost = db.collection("newPost");
-
-// router.get("/", (req, res) => res.send("No id provided"));
 
 router.get("/:id", (req, res) => {
   const queryId = req.params.id;
@@ -17,11 +12,9 @@ router.get("/:id", (req, res) => {
     .get()
     .then(function (doc) {
       if (doc.exists) {
-        // check if doc exists
         const data = doc.data();
         return res.send(data);
       } else {
-        // if no doc exists
         return res.send("no document exists");
       }
     })

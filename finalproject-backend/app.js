@@ -1,6 +1,7 @@
 // Backend Application for Final Project
 const express = require("express");
 const app = express();
+const port = process.env.PORT || 4000;
 
 const firebaseConfig = {
   apiKey: "AIzaSyCLz_TlYlo-Zs9hcVzVbFt52PJrsaNfUMw",
@@ -32,3 +33,5 @@ const createRoute = require("./routes/createPost.js");
 app.use("/", indexRoute);
 app.use("/post", postRoute);
 app.use("/create", createRoute);
+
+app.listen(port, () => console.log(`Backend is running at port:${port}`));

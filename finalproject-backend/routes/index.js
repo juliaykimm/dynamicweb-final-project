@@ -4,13 +4,10 @@ const express = require("express");
 const router = express.Router();
 
 const firebase = require("firebase");
-// initialize firestore database
 const db = firebase.firestore();
-// reference a specific collection
 const newPost = db.collection("newPost");
 
 router.get("/", (req, res) => {
-  // inside of this arrow function, we can do anything we want as long as we return at the end
   const newPostArray = [];
 
   newPost
