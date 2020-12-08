@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -12,37 +17,48 @@ import UserProfile from "./containers/UserProfile";
 
 import Header from "./components/Header";
 import HomePage from "./containers/HomePage";
+import CreatePost from "./containers/CreatePost";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCLz_TlYlo-Zs9hcVzVbFt52PJrsaNfUMw",
-  authDomain: "final-project-7bf99.firebaseapp.com",
-  databaseURL: "https://final-project-7bf99.firebaseio.com",
-  projectId: "final-project-7bf99",
-  storageBucket: "final-project-7bf99.appspot.com",
-  messagingSenderId: "658834115173",
-  appId: "1:658834115173:web:81ca21cbdebb9cfbf2948c",
-  measurementId: "G-3ZKJ2EJFMK",
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCLz_TlYlo-Zs9hcVzVbFt52PJrsaNfUMw",
+//   authDomain: "final-project-7bf99.firebaseapp.com",
+//   databaseURL: "https://final-project-7bf99.firebaseio.com",
+//   projectId: "final-project-7bf99",
+//   storageBucket: "final-project-7bf99.appspot.com",
+//   messagingSenderId: "658834115173",
+//   appId: "1:658834115173:web:81ca21cbdebb9cfbf2948c",
+//   measurementId: "G-3ZKJ2EJFMK",
+// };
+
+var firebaseConfig = {
+  apiKey: "AIzaSyBvpgDsICUR1NgzzdaWDZqd--19E6PpUe4",
+  authDomain: "final-project2-fb01f.firebaseapp.com",
+  projectId: "final-project2-fb01f",
+  storageBucket: "final-project2-fb01f.appspot.com",
+  messagingSenderId: "368055956185",
+  appId: "1:368055956185:web:d92b2e375e2554b11844c8",
 };
 
 function App() {
-  const [APIData, setAPIData] = useState([]);
+  // const [APIData, setAPIData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000`)
-      .then(function (response) {
-        const data = response.data;
-        setAPIData(data);
-      })
-      .catch(function (error) {
-        console.log("error", error);
-      });
-  }, [APIData]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:4000`)
+  //     .then(function (response) {
+  //       const data = response.data;
+  //       setAPIData(data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log("error", error);
+  //     });
+  // }, []);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userInformation, setUserInformation] = useState({});
   const [homeInformation, sethomeInformation] = useState({});
+  const [postInformation, setpostInformation] = useState({});
 
   useEffect(() => {
     if (!firebase.apps.length) {
@@ -57,6 +73,7 @@ function App() {
         setLoggedIn(true);
         setUserInformation(user);
         sethomeInformation(user);
+        setpostInformation(user);
       } else {
         setLoggedIn(false);
       }
@@ -143,6 +160,14 @@ function App() {
             <HomePage homeInformation={homeInformation} />
           )}
         </Route>
+        <Route exact path="/create-post">
+          {!loggedIn ? (
+            <Redirect to="/" />
+          ) : (
+            <CreatePost postInformation={postInformation} />
+          )}
+        </Route>
+        {/* <Route path="/recipeName"></Route> */}
       </Router>
     </div>
   );

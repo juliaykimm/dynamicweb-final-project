@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import axios from "axios";
 
 function Home() {
@@ -6,7 +7,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000`)
+      .get(`https://final-project-fall2020-web.herokuapp.com/`)
       .then(function (response) {
         const data = response.data;
         setAPIData(data);
@@ -14,19 +15,14 @@ function Home() {
       .catch(function (error) {
         console.log("error", error);
       });
-  }, [APIData]);
+  }, []);
 
   return (
     <div>
       <h1 className="PageTitles">FIND RECIPES:</h1>
       {APIData.map((APIData, i) => (
         <div className="recipes" key={i}>
-          <a href="">{APIData.recipeName}</a>
-        </div>
-      ))}
-      {APIData.map((APIData, i) => (
-        <div className="recipes" key={i}>
-          <p>{APIData.recipeAuhtor}</p>
+          <a href="/">{APIData.recipeName}</a>
         </div>
       ))}
     </div>

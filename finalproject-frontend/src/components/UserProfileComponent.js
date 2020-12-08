@@ -3,9 +3,9 @@ import React from "react";
 function UserProfileComponent({ userInformation }) {
   return (
     <div>
-      <p>
+      <h1 className="SubPageTitles">
         <strong>Email:</strong> {userInformation.email}
-      </p>
+      </h1>
     </div>
   );
 }
