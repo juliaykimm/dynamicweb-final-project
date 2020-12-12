@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-function Home() {
+function RecipeComponent() {
   const [APIData, setAPIData] = useState([]);
 
   useEffect(() => {
@@ -19,14 +19,22 @@ function Home() {
 
   return (
     <div>
-      <h1 className="PageTitles">FIND RECIPES:</h1>
       {APIData.map((APIData, i) => (
-        <div className="recipes" key={i}>
-          <a href="/recipe">{APIData.recipeName}</a>
+        <div key={i}>
+          <h1 className="PageTitles"> {APIData.recipeName}</h1>
+          <p className="SubPageTitles">By: {APIData.recipeAuthor}</p>
+          <ul>
+            ingredients:
+            <li>{APIData.ingredients}</li>
+          </ul>
+          <ul>
+            steps:
+            <li>{APIData.steps}</li>
+          </ul>
         </div>
       ))}
     </div>
   );
 }
 
-export default Home;
+export default RecipeComponent;

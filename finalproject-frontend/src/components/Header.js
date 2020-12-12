@@ -8,9 +8,7 @@ function Header({ loggedIn, LogoutFunction }) {
           <>
             <a href="/">Profile</a>
             <a href="/home">Find Recipes</a>
-            {/* <a href="https://final-project-fall2020-web.herokuapp.com/create">
-              New Post
-            </a> */}
+
             <a href="/create-post">New Recipe</a>
             <a onClick={() => LogoutFunction()}>Logout</a>
           </>

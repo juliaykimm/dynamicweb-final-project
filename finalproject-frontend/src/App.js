@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -18,19 +12,9 @@ import UserProfile from "./containers/UserProfile";
 import Header from "./components/Header";
 import HomePage from "./containers/HomePage";
 import CreatePost from "./containers/CreatePost";
+import Recipe from "./containers/Recipe";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCLz_TlYlo-Zs9hcVzVbFt52PJrsaNfUMw",
-//   authDomain: "final-project-7bf99.firebaseapp.com",
-//   databaseURL: "https://final-project-7bf99.firebaseio.com",
-//   projectId: "final-project-7bf99",
-//   storageBucket: "final-project-7bf99.appspot.com",
-//   messagingSenderId: "658834115173",
-//   appId: "1:658834115173:web:81ca21cbdebb9cfbf2948c",
-//   measurementId: "G-3ZKJ2EJFMK",
-// };
-
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyBvpgDsICUR1NgzzdaWDZqd--19E6PpUe4",
   authDomain: "final-project2-fb01f.firebaseapp.com",
   projectId: "final-project2-fb01f",
@@ -40,25 +24,12 @@ var firebaseConfig = {
 };
 
 function App() {
-  // const [APIData, setAPIData] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:4000`)
-  //     .then(function (response) {
-  //       const data = response.data;
-  //       setAPIData(data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log("error", error);
-  //     });
-  // }, []);
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userInformation, setUserInformation] = useState({});
   const [homeInformation, sethomeInformation] = useState({});
   const [postInformation, setpostInformation] = useState({});
+  const [recipeInformation, setrecipeInformation] = useState({});
 
   useEffect(() => {
     if (!firebase.apps.length) {
@@ -69,11 +40,11 @@ function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        // user is logged in
         setLoggedIn(true);
         setUserInformation(user);
         sethomeInformation(user);
         setpostInformation(user);
+        setrecipeInformation(user);
       } else {
         setLoggedIn(false);
       }
@@ -90,10 +61,10 @@ function App() {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(function (response) {
-        console.log("LOGIN RESPONSE", email, response);
+        console.warn("LOGIN RESPONSE", email, response);
       })
       .catch(function (error) {
-        console.log("LOGIN ERROR", error);
+        console.warn("LOGIN ERROR", error);
       });
   }
   function LogoutFunction(e) {
@@ -105,7 +76,7 @@ function App() {
         setUserInformation({});
       })
       .catch(function (error) {
-        console.log("LOGOUT ERROR", error);
+        console.warn("LOGOUT ERROR", error);
       });
   }
 
@@ -118,11 +89,11 @@ function App() {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(function (response) {
-        console.log("VALID ACC CREATED", email, response);
+        console.warn("VALID ACC CREATED", email, response);
         setLoggedIn(true);
       })
       .catch(function (error) {
-        console.log("ACC CREATION FAILED", error);
+        console.warn("ACC CREATION FAILED", error);
       });
   }
 
@@ -167,7 +138,13 @@ function App() {
             <CreatePost postInformation={postInformation} />
           )}
         </Route>
-        {/* <Route path="/recipeName"></Route> */}
+        <Route exact path="/recipe">
+          {!loggedIn ? (
+            <Redirect to="/" />
+          ) : (
+            <Recipe recipeInformation={recipeInformation} />
+          )}
+        </Route>
       </Router>
     </div>
   );

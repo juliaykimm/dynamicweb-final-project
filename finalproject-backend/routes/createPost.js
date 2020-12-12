@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-// Require Firebase
 const firebase = require("firebase");
-// Initialize Firebase Database
 const db = firebase.firestore();
-// Reference a specific collection
 const newPost = db.collection("newPost");
 
 const form = `
@@ -30,7 +27,7 @@ router.get("/submit", (req, res) => {
       res.send("Successful Submission");
     })
     .catch(function (error) {
-      console.log("error", error);
+      console.warn("error", error);
       res.send("Failed Submission");
     });
 });
